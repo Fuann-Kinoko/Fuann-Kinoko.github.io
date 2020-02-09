@@ -354,7 +354,13 @@
 <p>假设有序列$a_1,a_2,…,a_n$与$b_1,b_2,…,b_n$，两序列值序相同，得到距离$A$</p>
 <p>即有$(a_k&gt;a_{k+1})==(b_k&gt;b_{k+1})$，$k\in[1,n),k\in Z$</p>
 <p>若按照题意交换$a_k,a_{k+1}$，得到距离$A^{‘}$</p>
-<p>那么<br>$$<br>\begin{align}<br>A^{‘}-A &amp;= (a_{k+1}b_k+a_kb_{k+1})-(a_kb_k+a_{k+1}b_{k+1})\\<br>        &amp;= (a_{k+1}-a_k)b_k+(a_k-a_{k+1})b_{k+1}\\<br>        &amp;= (a_{k+1}-a_k)(b_k-b_{k+1})<br>\end{align}<br>$$<br>由定义知，$A^{‘}-A&lt;0$，那么交换之后一定不优。</p>
+<p>那么 </p>
+<script type="math/tex; mode=display">
+\begin{align}
+A^{'}-A &= (a_{k+1}b_k+a_kb_{k+1})-(a_kb_k+a_{k+1}b_{k+1})\\\\
+        &= (a_{k+1}-a_k)b_k+(a_k-a_{k+1})b_{k+1}\\\\
+        &= (a_{k+1}-a_k)(b_k-b_{k+1})
+\end{align}</script><p>由定义知，$A^{‘}-A&lt;0$，那么交换之后一定不优。</p>
 <p>反过来证明了值序相同时是最优的</p>
 <p><br><br><br></p>
 <p>这样题意再一次转换了：将a序列的值序转化成与b序列一致，求交换的最小次数。</p>

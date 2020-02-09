@@ -324,14 +324,16 @@
 <p>有序列满足$f_i=af_{i-1}+bf_i+cf_{i+1}$，$f_0=0,f_{2n}=1$，求$f_n$的值</p>
 <h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h3 id="20"><a href="#20" class="headerlink" title="20%"></a>20%</h3><p>将$f_1=0,f_{2n}=1$代入式子高斯消元即可</p>
 <h3 id="100"><a href="#100" class="headerlink" title="100%"></a>100%</h3><h4 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h4><p>时间复杂度$O(n)$</p>
-<p>由$f_i=af_{i-1}+bf_i+cf_{i+1}$，可得<br>$$<br>f_{i+1}=\frac{(1-b)f_i-af_{i-1}}{c}<br>$$<br>设$f_1=x$，可以用$k_ix$的形式表示$f_2,f_3,…f_{2n}$。</p>
+<p>由$f_i=af_{i-1}+bf_i+cf_{i+1}$，可得</p>
+<script type="math/tex; mode=display">
+f_{i+1}=\frac{(1-b)f_i-af_{i-1}}{c}</script><p>设$f_1=x$，可以用$k_ix$的形式表示$f_2,f_3,…f_{2n}$。</p>
 <p>线性递推，用$f_{2n}=1$可以解出$x$，代入$f_n=k_nx$即可求出答案</p>
 <h4 id="解法2"><a href="#解法2" class="headerlink" title="解法2"></a>解法2</h4><p>时间复杂度$O(2^3log n)$</p>
 <p>在解法1的基础上用矩阵快速幂优化</p>
 <h4 id="解法3"><a href="#解法3" class="headerlink" title="解法3"></a>解法3</h4><p>时间复杂度$O(1)$</p>
 <p>首先根据定义可知$a+b+c=1$</p>
 <p>对式子化简：</p>
-<p>$\begin{array} &amp; (1-b)f_i=af_{i-1}+cf_{i+1} \\ (a+c)f_i=af_{i-1}+cf_{i+1} \\ a(f_i-f_{i-1})=c(f_{i+1}-f_i) \end{array} \\ \frac{f_{i+1}-f_i}{f_i-f_{i-1}}=\frac{a}{c}$ </p>
+<p>$\begin{array} &amp; (1-b)f_i=af_{i-1}+cf_{i+1} \\\\ (a+c)f_i=af_{i-1}+cf_{i+1} \\\\ a(f_i-f_{i-1})=c(f_{i+1}-f_i) \end{array} \\\\ \frac{f_{i+1}-f_i}{f_i-f_{i-1}}=\frac{a}{c}$ </p>
 <p>此差分式为等比数列，令$k=\frac a c$，$k$即为公比，用等比数列求和求出</p>
 <p>$f_i=f_1 \frac{k^i-1}{k-1}$</p>
 <p>这样就可以$O(n)$做了，但我们还可以进一步优化：</p>
@@ -388,9 +390,26 @@ int main(){
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
+          
+            <div class="post-nepre half previous">
+          
+            <a href="/2020/02/09/15/" rel="prev">
+              <div class="background">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/oi/" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/oi/">
+              </div>
+              <span class="label">
+              Previous Post</span>
+              <div class="info">
+                <h3>
+                有关C(n+k-1,2k-1)的代数意义及证明</h3>
+                <hr>
+              </div>
+            </a>
+          </div>
+        
         
           
-            <div class="post-nepre full next">
+            <div class="post-nepre half next">
           
             <a href="/2019/11/07/12/" rel="next">
               <div class="background">

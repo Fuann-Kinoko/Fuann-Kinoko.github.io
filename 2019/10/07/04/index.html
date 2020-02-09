@@ -360,8 +360,26 @@
 <p>假设有$f_i(f_j(x))$展开</p>
 <p>得到    $a(cx+d)+b$</p>
 <p>那么就能轻易列出矩阵方程</p>
-<p>$$<br>\left[<br>\begin{matrix}<br>  a &amp;b\\<br>  0 &amp; 1<br>  \end{matrix}<br>  \right]<br> \left[<br>\begin{matrix}<br>  c &amp; d\\<br>  0 &amp; 1<br>  \end{matrix}<br>  \right]<br>  =<br> \left[<br>\begin{matrix}<br>  ac &amp; ad+b\\<br>  0 &amp; 1<br>  \end{matrix}<br>  \right]<br>$$</p>
-<p>想要维护前k个，用线段树即可</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+  a &b\\\\
+  0 & 1
+  \end{matrix}  
+  \right]
+ \left[
+\begin{matrix}
+  c & d\\\\
+  0 & 1
+  \end{matrix}  
+  \right]
+  =
+ \left[
+\begin{matrix}
+  ac & ad+b\\\\
+  0 & 1
+  \end{matrix}  
+  \right]</script><p>想要维护前k个，用线段树即可</p>
 <p>（一个小细节：由于矩阵没有乘法交换律，依照这样的方式建线段树，查询时应查询n-k+1~n的积）</p>
 <p>代码附上</p>
 <pre><code>#include &lt;bits/stdc++.h&gt;

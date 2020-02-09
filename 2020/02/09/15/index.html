@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">Luogu P2123 皇后游戏 题解 | ゲーマーになりたい</title>
+  <title itemprop="name">有关C(n+k-1,2k-1)的代数意义及证明 | ゲーマーになりたい</title>
   
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/favicon/favicon.ico">
   
@@ -285,15 +285,15 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki6.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki6.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/oi/);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/oi/">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      Luogu P2123 皇后游戏 题解</h1>
+      有关C(n+k-1,2k-1)的代数意义及证明</h1>
       <p class="entry-census">
         <span>
           <a href="https://fuann-kinoko.github.io/">
-            <img src="https://avatars3.githubusercontent.com/u/56078314?s=460&v=4">
+            <img src="https://i.loli.net/2020/02/09/KxCtIyfFesrv4Zw.jpg">
           </a>
         </span>
         <span>
@@ -301,7 +301,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2019-10-15<span class="bull">
+        2020-2-9<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -318,137 +318,59 @@
           
           <p><center><font color=gray size=3>若数学公式无法显现请自行刷新</font></center></p><br><br><br>
           
-          <p>传送门：<a href="https://www.luogu.org/problem/P2123" target="_blank" rel="noopener">P2123</a></p>
-<p>首先，显而易见的，$C_n$一定大于之前的所有$C_i$，拿钱最多的一定是最后一个。所以这不是一个二分题。</p>
-<center><font color="gray" size="72">拆式</font></center>
+          <p><strong><em>本文章由我（CXL）与ZYF共同完成，经ZYF同意放在个人博客上</em></strong></p>
+<h1 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h1><p>数学课上想了道题：</p>
+<p>​        设$x_1,x_2,…,x_k \in N^{\star}$，$n\in N^{\star}$，有$\sum_{i=1}^{k}x_i=n$，令集合A为所有可能的k元组$(x_1,x_2,…,x_k)$的集合，$\alpha$是A中的元素，且$\alpha=(x_1,x_2,…,x_k)$。定义$T(\alpha)=\prod_{i=1}^{k}x_k$,求$\sum_{\alpha\in A}T(\alpha)$。</p>
+<p>这个表述看起来有点吓人，其实举个例子就很简单：</p>
+<p>​        比如k=3,n=3.求的结果就是$1{\star}1{\star}1=1$</p>
+<p>​               k=3,n=4.求的结果就是$1{\star}1{\star}2+1{\star}2{\star}1+2{\star}1{\star}1=6$</p>
+<p>​        即选出k个正整数，让这些数的和为n。定义在这个条件下让这k个数相乘的结果为$T（x_1,x_2,…,x_k）$，求所有T之和。</p>
+<p>怎么解？没思路。于是回家写了个程序打表找规律。</p>
+<p><del>然后就找出来了，是C(n+k-1,2k-1)，是个组合数</del>   运气真好（</p>
+<h1 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h1><p>怎么能够只满足于结论呢！</p>
+<p>想了很多种几何意义，想尝试将其与组合数结合，还是没有证明出来。最后在ZYF数竞巨佬的带领下，成功完成了证明，其中的曲折和灵光一现的激动这里就不再阐述。</p>
+<p>证明：</p>
+<p>以$x_1,x_2,…,x_k$为轴建立$k$维直角坐标系。</p>
+<p>对于其中一个点$P(p_1,p_2,…,p_k)$，定义其生成胞体$\Omega P$如下：</p>
+<p>​    过$p_k$个$k-1$维空间作垂线，这$k$个$k-1$维空间是</p>
+<p>​        直线$ox_1,ox_2,…,ox_{k-2},ox_{k-1}$所在空间</p>
+<p>​        直线$ox_1,ox_2,…,ox_{k-2},ox_k$所在空间</p>
+<p>​        …</p>
+<p>​        直线$ox_2,ox_3,…,ox_{k-1},ox_k$所在空间</p>
+<p>​    以这k条垂线为棱便得到此胞体</p>
+<p>将k元组$\alpha$与k维空间中的点$X(x_1,x_2,…,x_k)$对应，则$T(\alpha)$即为$\Omega(X)$中单位胞体的个数</p>
+<p><a href="https://i.loli.net/2020/02/09/T7Q5vxqmpu3nkhg.jpg" target="_blank" rel="noopener">二维和三维图</a></p>
+<p>设A中元素对应的点集合为B，设$\Delta(X)$为$\Omega(X)$的单位胞体个数，则$\sum_{\alpha\in A}T(\alpha)=\sum_{X\in B}\Omega(X)$。</p>
+<p>易知B中元素皆是空间$\delta：x_1+x_2+…+x_k=n$上的极点。</p>
+<p><a href="https://i.loli.net/2020/02/09/4Ac9ilFNuwrJ3Px.jpg" target="_blank" rel="noopener">二维图</a></p>
+<p>现在就要考虑每个单位胞体被计算的次数，即求它被多少个B中元素的生成胞体包含。</p>
+<p>我们用一个单位胞体中，坐标之和最大的那个点来代指这个单位胞体。如果一个单位胞体$Q(q_1,q_2,…,q_k)$满足$n-(q_1+q_2+…+q_k)=i-1$，则称它位于第$i$层。</p>
+<p><a href="https://i.loli.net/2020/02/09/xKgnE7Y6fSNJvcu.jpg" target="_blank" rel="noopener">二维图</a></p>
+<p>因为在第$i$层的胞体Q满足$q_1+q_2+…+q_k=n-i+1$，所以这一层有$C_{i-1}^{k-1}$个单位胞体。注意到一个胞体Q被包含在点$P(p_1,p_2,…,p_k)$的生成胞体$\Omega(P)$中的充要条件是：</p>
+<p>​    $\forall i\in{(1,2,…,k)},p_i&gt;=q_i$成立</p>
+<p><a href="https://i.loli.net/2020/02/09/cj4aEMvTOlI9Ktd.jpg" target="_blank" rel="noopener">二维图</a></p>
+<p>因此可以得到，对于某个位于第$i$层的单位胞体Q，若B中的点X的生成胞体包含它，则</p>
+<p>​    $\forall i\in{(1,2,…,k)},x_i-q_i&gt;=0$</p>
+<p>由于$\sum_{i=1}^{k}(x_i-q_i)=\sum_{i=1}^kx_i-\sum_{i=1}^kq_i=n-(n-i+1)=i-1$，</p>
+<p>故k元组$(x_1-q_1,x_2-q_2,…,x_k-q_k)$有$C_{i+k-2}^{k-1}$中取法。</p>
+<p>即k元组$(x_1,x_2,…,x_k)$有$C_{i+k-2}^{k-1}$\</p>
+<p>即有$C_{i+k-2}^{k-1}$个$\Omega(X)$包含单位胞体Q，则第$i$层中所有胞体被计算次数为$C_{i+k-2}^{k-1}{\star}C_{n-i}^{k-1}$。于是：</p>
+<p>​    $\sum_{\alpha\in A}T(\alpha)=\sum_{X\in B}\Delta(X)=\sum_{i=1}^{n-k+1} C_{k+i-2}^{k-1}{\star}C_{n-i}^{k-1}$</p>
+<p>要证明$\sum_{i=1}^{n-k+1} C_{k+i-2}^{k-1}{\star}C_{n-i}^{k-1}=C_{n+k-1}^{2k-1}$</p>
+<p>令$k-1=t$（为了方便），则原式等价于求$\sum_{i=1}^{n-t}C_{t+i-1}^{t}{\star}C_{n-i}^t=C_{n+t}^{2t+1}$</p>
+<p>令$n+t-1=m$</p>
+<p>LHS（指左等式）=$\sum_{i=1-t}^{n}C_{t+i-1}^{t}{\star}C_{n-t}^t=\sum_{i=0}^{n+t-1}C_i^t{\star}C_{n+t-i-1}^{t}=\sum_{i=0}^{m}C_i^t{\star}C_{m-i}^t$</p>
+<p>RHS=$C_{m+1}^{2t+1}$</p>
+<p>等价于证明$\sum_{i=0}^{m}C_i^t{\star}C_{m-i}^t=C_{m+1}^{2t+1}$</p>
+<p>下面就是最神奇的地方：</p>
+<p>​    设集合D={$1,2,…,m+1$}，从中取出$2t+1$个元素，有$C_{m+1}^{2t+1}$种取法，这$2t+1$个元素也可用如下方式取：</p>
+<p>​    先取出元素$i+1$，再在集合{$1,2,…,i$}和{$i+2,i+3,…,,m+1$}中分别取出$t$个元素，也就是$C_i^t{\star}C_{m-i}^t$个取法。</p>
+<p>这样就巧妙的利用几何将两个组合数相乘转化为一个组合数。</p>
+<p>最后对$i$求和，就得到式子：$\sum_{i=0}^{m}C_i^t{\star}C_{m-i}^t=C_{m+1}^{2t+1}$</p>
+<p>证毕。</p>
+<h1 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h1><p>对这个式子的探究都是期末之前完成的了，这么说来岂不是咕了几个月（</p>
+<p>感谢：ZYF，以及帮我联系到ZYF的数竞神仙WZX</p>
 
-
-
-
-
-
-<p>设$S_i=\sum_{j=1}^ia_j$，$T_i=\sum_{j=i}^nb_j$</p>
-<p>以有四个大臣为例</p>
-<script type="math/tex; mode=display">
-C_4=max(C_3,S_4)+b_4=max(C_3+b_4,S_4+b_4) \tag*{①}</script><script type="math/tex; mode=display">
-C_3=max(C_2,S_3)+b_3=max(C_2+b_3,S_3+b_3) \tag*{②}</script><script type="math/tex; mode=display">
-C_2=max(C_1,S_2)+b_2=max(C_1+b_2,S_2+b_2) \tag*{③}</script><script type="math/tex; mode=display">
-C_1=S_1+b_1 \tag*{④}</script><p>将式子$①②③④$以递归的思想展开</p>
-<script type="math/tex; mode=display">
-C_2=max(S_1+b_1+b_2,S_2+b_2)</script><script type="math/tex; mode=display">
-C_3=max(S_1+b_1+b_2+b_3,S_2+b_2+b_3,S_3+b_3)</script><script type="math/tex; mode=display">
-C_4=max(S_1+b_1+b_2+b_3+b_4,S_2+b_2+b_3+b_4,S_3+b_3+b_4,S_4+b_4)</script><p>化简为</p>
-<script type="math/tex; mode=display">
-C_4=max(S_1+T_1,S_2+T_2,S_3+T_3,S_4+T_4)</script><p>同理归纳出</p>
-<script type="math/tex; mode=display">
-C_n=max(S_1+T_1,S_2+T_2,...,S_n+T_n)  \tag*⑤</script><p>为了方便，用$2\times{n}$的矩阵表示</p>
-<script type="math/tex; mode=display">
-\left[
- \begin{matrix}
-   a_1 & a_2 & a_3 & ...& a_n\\\\
-   b_1 & b_2 & b_3 & ...& b_n
-  \end{matrix}
-  \right]</script><p>记$P_n(k)$表示选择矩阵中$a_1+a_2+…+a_k+b_k+b_{k+1}+…+b_n$的路径,即$S_k+T_k$</p>
-<p>由$⑤$可得$C_n=max(P_n(1),P_n(2),…,P_n(n))$ </p>
-<p>我们想要干的就是调整$a,b$序列的顺序，使得$C_n$最小。但直接调整整个序列实在不现实。</p>
-<center><font color="gray" size="72">排序</font></center>
-
-
-
-
-
-
-<p>考虑冒泡排序法,比较相邻两列$j,k$并按某种方式交换以得到最优序列。<del>正确性就是冒泡的正确性</del></p>
-<p>单独提出两列$<br>\left[<br> \begin{matrix}<br>   a_j &amp; a_k\\\\<br>   b_j &amp; b_k<br>  \end{matrix}<br>  \right]<br>$，交换后的话就是$<br>\left[<br> \begin{matrix}<br>   a^{‘}_j &amp; a^{‘}_k\\\\<br>   b^{‘}_j &amp; b^{‘}_k<br>  \end{matrix}<br>  \right]<br>$  ，有$a^{‘}_j=a_k,a^{‘}_k=j$，$b$的两个数同理</p>
-<p>设交换后矩阵为$C^{‘}_n$由上面定义可以得$P^{‘}_n(i)=P_n(i),i\in[1,j)\bigcup(k,n]$</p>
-<p>要讨论的就是不相等的$P^{‘}_n(j)，P_n(j)$以及$P^{‘}_n(k)，P_n(k)$</p>
-<p>令$Other$表示$S_n+T_1-a_j-b_j-a_k-b_k$，$Other=S_n+T_n-a^{‘}_j-b^{‘}_j-a^{‘}_k-b^{‘}_k$</p>
-<p>$P_n(j)=Other+a_j+b_j+b_k$ </p>
-<p>$P_n(k)=Other+a_j+a_k+b_k$</p>
-<p>$P^{‘}_n(j)=Other+a^{‘}_j+b^{‘}_j+b^{‘}_k=Other+a_k+b_k+b_j $</p>
-<p>$P^{‘}_n(k)=Other+a^{‘}_j+a^{‘}_k+b^{‘}_k=Other+a_k+a_j+b_j$</p>
-<p>对于$a_j,b_j,a_k,b_k$四数进行分类讨论</p>
-<ul>
-<li>$a_j$为四数最小，则四式最大的是$P^{‘}_n(j)$，可得$C_n\leq{C^{‘}_n}$</li>
-<li>$a_k$为四数最小，则四式最大的是$P_n(j)$，可得$C_n\geq{C^{‘}_n}$</li>
-<li>$b_j$为四数最小，则四式最大的是$P_n(k)$，可得$C_n\geq{C^{‘}_n}$</li>
-<li>$b_j$为四数最小，则四式最大的是$P^{‘}_n(k)$，可得$C_n\leq{C^{‘}_n}$</li>
-</ul>
-<p>得到结论:若$a_k$或$b_j$为四数最小，则交换后的$C_n$更小</p>
-<p>用矩阵来说就是当相邻两列$<br>\left[<br> \begin{matrix}<br>   a_j &amp; a_k\\\\<br>   b_j &amp; b_k<br>  \end{matrix}<br>  \right]<br>$的最小数存在于左下至右上的对角线上时，应当交换</p>
-<p>当然，也可以写作$min(a_j,b_k)&gt;min(a_k,b_j)  \tag*⑥$ </p>
-<center><font color="gray" size="72">代码实现</font></center>
-
-
-
-
-
-
-<p>根据⑥式，就能写出重载&lt;运算符的式子</p>
-<p>$min(a_j,b_k)&lt;min(a_k,b_j)$</p>
-<p>这样在数学中，使用冒泡排序是正确的。</p>
-<p>但运用到std::sort就不一定了：</p>
-<p>以下内容，部分引用自论文《<a href="https://ouuan.github.io/%E6%B5%85%E8%B0%88%E9%82%BB%E9%A1%B9%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F%E7%9A%84%E5%BA%94%E7%94%A8%E4%BB%A5%E5%8F%8A%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E9%97%AE%E9%A2%98/" target="_blank" rel="noopener">浅谈邻项交换排序的应用以及需要注意的问题</a>》，以及机房内Z神仙的发言</p>
-<p>std::sort中可不是冒泡排序，它的实现相当复杂，做到了极高的效率。也正因如此，它对比较函数的要求也十分严格。std::sort要求比较函数为严格弱序。</p>
-<p>对于一个比较运算符（用“$&lt;$”表示此运算符，用“$\not&lt;$”表示不满足此运算符），若满足以下四个条件，则称其是满足严格弱序的：</p>
-<ol>
-<li>$x\not&lt;x$ （非自反性）</li>
-<li>若 $x&lt;y$，则 $y\not&lt;x$ （非对称性）</li>
-<li>若 $x&lt;y，y&lt;z$，则 $x&lt;z$ （传递性）</li>
-<li>若 $x\not&lt;y,y\not&lt;x,y\not&lt;z,z\not&lt;y$，则 $x\not&lt;z,z\not&lt;x$ （不可比性的传递性）</li>
-</ol>
-<p>第四点还有另一个版本：</p>
-<pre><code>It has to have transitivity of equivalence, which means roughly: If a is equivalent to b and b is equivalent to c, then a is equivalent to c.
-
-This means that for operator &lt;: If !(a&lt;b)&amp;&amp;!(b&lt;a) is true and !(b&lt;c)&amp;&amp;!(c&lt;b) is true , then !(a&lt;c)&amp;&amp;!(c&lt;a) is true.
-
-This means that for a predicate op(): If op(a,b), op(b,a), op(b,c), and op(c,b) all yield false, then op(a,c) and op(c,a) yield false.
-</code></pre><p>我们可以证明这个式子不满足不可比性的传递性，详情看上面的论文</p>
-<p>因此这个式子不能用作比较函数</p>
-<p>要使其成为比较函数，还需要更多的条件。</p>
-<p>当$min(a_j,b_k)==min(a_k,b_j)$ 时，根据式子来说交换不交换无所谓。但实际上，把$a$更小的放前面才能保证排序的正确性。</p>
-<p>先来一个口胡版：</p>
-<p>从另一个角度理解，本题就是个流水调度问题。对于原料的粗加工相当于$a_i$，精加工相当于$b_i$。题目就是求从粗加工第一种原料开始至精加工完最后一种原料的最短时间。我们要精加工机器的空闲时间最少，就希望先加工$a_i&lt;b_i$的原料，让精加工机器少闲着。</p>
-<p>这个不是严格的证明，但应该能解释$min(a_j,b_k)==min(a_k,b_j)$时为什么$a$小的放前面。</p>
-<p>事实上，这种以冒泡而延展出的比较函数，将原下标加入比较，强行使其满足严格弱序这种方式已经可以算是套路了。下次遇见这类题，也可以贪心地从下标比较，尝试使其满足严格弱序。</p>
-<p>至此，我们得到了正确的排序方式。</p>
-<p>AC代码：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-#define mem(O) memset(O,0,sizeof(O))
-using namespace std;
-typedef long long ll;
-
-inline int red(){
-    int x=0,f=1;char ch=getchar();for(;!isdigit(ch);ch=getchar())if(ch==&#39;-&#39;)f=-1;
-    for(;isdigit(ch);ch=getchar())x=x*10+ch-&#39;0&#39;;return x*f;
-}
-
-const int N = 1e5+10;
-const ll INF = 0x3f3f3f3f3f3f3f3f;
-
-ll s[N],t[N];int n;
-struct node{ll a,b,id;}g[N];
-bool operator &lt; (const node A1,const node A2) {
-    if(min(A1.a,A2.b)==min(A2.a,A1.b))    return A1.a&lt;A2.a;
-    return min(A1.a,A2.b)&lt;min(A2.a,A1.b);
-}
-
-int main(){
-    int Tim=red();
-    while(Tim--){
-        n=red();
-        for(int i=1;i&lt;=n;++i)    g[i].a=red(),g[i].b=red();
-        sort(g+1,g+n+1);
-        for(int i=1;i&lt;=n;++i)    s[i]=s[i-1]+g[i].a;
-        for(int i=n;i&gt;=1;--i)    t[i]=t[i+1]+g[i].b;
-        ll ans=0;
-        for(int i=1;i&lt;=n;++i)    ans=max(ans,s[i]+t[i]);
-        printf(&quot;%lld\n&quot;,ans);
-        mem(g),mem(s),mem(t);
-    }
-    return 0;
-}
-</code></pre>
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
@@ -466,36 +388,19 @@ int main(){
       <div class="toc" style="background: none;"></div>
       <section class="post-squares nextprev">
         
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2019/10/15/07/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/others/shina.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/others/shina.webp">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                Hexo 建站指北</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
         
           
-            <div class="post-nepre half next">
+            <div class="post-nepre full next">
           
-            <a href="/2019/10/11/05/" rel="next">
+            <a href="/2019/11/08/14/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki4.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki4.webp">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://i.loli.net/2019/11/08/9JiQw3Ef5W6TGse.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://i.loli.net/2019/11/08/9JiQw3Ef5W6TGse.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                CF402D 题解</h3>
+                CSP-S测试 药品试验 题解</h3>
                 <hr>
               </div>
             </a>
@@ -520,7 +425,7 @@ int main(){
 
       <section class="author-profile">
         <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <a href="https://fuann-kinoko.github.io/" class="profile gravatar"><img src="https://avatars3.githubusercontent.com/u/56078314?s=460&v=4" itemprop="image" alt="不安きのこ" height="70" width="70"></a>
+          <a href="https://fuann-kinoko.github.io/" class="profile gravatar"><img src="https://i.loli.net/2020/02/09/KxCtIyfFesrv4Zw.jpg" itemprop="image" alt="不安きのこ" height="70" width="70"></a>
           <div class="meta">
             <span class="title">Author</span>
             <h3 itemprop="name">
