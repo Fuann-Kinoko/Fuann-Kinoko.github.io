@@ -180,10 +180,10 @@ function imgError (ele, type) {
       break
     case 3:
 
-          ele.src = 'https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/404.jpg'
+          ele.src = 'https://i.loli.net/2021/10/04/SQuhe9lApTmIyoM.jpg'
       break
     default:
-          ele.src = 'https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/404.jpg'
+          ele.src = 'https://i.loli.net/2021/10/04/SQuhe9lApTmIyoM.jpg'
   }
 }
 mashiro_global.post_list_show_animation = new function () {
