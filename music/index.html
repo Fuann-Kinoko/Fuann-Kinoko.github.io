@@ -365,13 +365,21 @@
 </footer> -->
 <div id="gitalk-container"></div>
 <footer id="colophon" class="site-footer" role="contentinfo">
+  <script>
+    window.onload = () => {
+      var youKnowDate = new Date();
+      var copyyear = youKnowDate.getFullYear();
+      document.getElementById("copyright_year").innerHTML = "&copy "+copyyear;
+  }
+  </script>
   <div class="site-info">
     <div class="footertext">
       <div class="img-preload">
         <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wordpress-rotating-ball-o.svg">
         <img src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/disqus-preloader.svg">
       </div>
-      <p style="color: #666666;">&copy 2021</p>
+      <!-- <p style="color: $666666;">&copy 2021</p> -->
+      <p style="color: #666666;" id="copyright_year"></p>
     </div>
     <div class="footer-device">
     <p style="font-family: 'Ubuntu', sans-serif;">
