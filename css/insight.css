@@ -109,7 +109,7 @@
 .ins-section .ins-search-item header,
 .ins-section .ins-search-item .ins-search-preview {
   overflow: hidden !important;
-  /* white-space: nowrap !important; */
+  white-space: nowrap !important;
   text-overflow: ellipsis !important;
 }
 .ins-section .ins-search-item header .fa {
@@ -119,7 +119,7 @@
   height: 15px !important;
   font-size: 12px !important;
   color: #9a9a9a !important;
-  /* margin: 5px 0 0 20px !important; */
+  margin: 5px 0 0 20px !important;
 }
 .ins-section .ins-search-item:hover,
 .ins-section .ins-search-item.active {
