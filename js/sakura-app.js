@@ -1099,10 +1099,12 @@ var home = location.href,
         var valine = new Valine()
         valine.init({
           el: '#vcomments',
-          appId: mashiro_option.v_appId,
-          appKey: mashiro_option.v_appKey,
+          // appId: mashiro_option.v_appId,
+          appId: P0YeSxgMX2gJNe4bTcHDlH1f-gzGzoHsz,
+          // appKey: mashiro_option.v_appKey,
+          appKey: gyrwrBnl0XXlnCfHrGqABj9t,
           path: window.location.pathname,
-          placeholder: '你是我一生只会遇见一次的惊喜 ...'
+          placeholder: ' '
         })
       }
     },

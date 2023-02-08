@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">USACO16FEB Load Balancing Platinum 题解 | Blog - 不安きのこ -</title>
+  <title itemprop="name">随想 | Blog - 不安きのこ -</title>
   
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/favicon/bitbug_favicon2.ico">
   
@@ -286,11 +286,11 @@
 
   <div class="pattern-center single-center">
     <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki8.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki8.webp">
+    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/oi/);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/oi/">
     </div>
     <header class="pattern-header single-header">
       <h1 class="entry-title">
-      USACO16FEB Load Balancing Platinum 题解</h1>
+      随想</h1>
       <p class="entry-census">
         <span>
           <a href="https://fuann-kinoko.github.io/">
@@ -302,7 +302,7 @@
         </span>
         <span class="bull">
         ·</span>
-        2019-10-21<span class="bull">
+        2022-11-2<span class="bull">
         ·</span>
       <span id="busuanzi_value_page_pv"></span>次阅读</p>
     </header>
@@ -317,125 +317,40 @@
         
         <div class="entry-content">
           
-          <p><center><font color=gray size=3>若数学公式无法显现请自行刷新</font></center></p><br><br><br>
-          
-          <p>传送门：<a href="https://www.luogu.org/problem/P3138" target="_blank" rel="noopener">Load Balancing_Silver</a> </p>
-<p>传送门的题面虽然是Silver，但和Platinum的区别也只在数据范围，所以看题面看水谷就行了。Platinum的数据范围是1E5，此解法也可AC</p>
-<p>看了一眼题，先敲了60行splay，再认真看题……卧槽根本不用平衡树。但是既然都写了……不用就太吃亏了。这里就写下平衡树解法吧。</p>
-<p>首先标准的二分，看不出来请自裁。令x线指与y轴平行的线，y线指与x轴平行的线。我们发现不能二分套二分的来求x线和y线，因为这两个在一起并不满足单调性。</p>
-<p>看一下数据范围，如果是$Nlog(N)$或者$Nlog^2(N)$应该还是能够接受的。考虑枚举x线，二分y线，这时候我们需要的就是两棵平衡树，L存着在x线左侧的所有点的y坐标，另一棵R存着在x线右侧的所有点的y坐标。每次x线向后移时，只需要在L中插入一些，在R中删除一些即可。</p>
-<p>至于为什么二分y线就是满足单调的呢？这点稍微画下图就能明白。check的条件也就是</p>
-<pre><code>if max(左下，右下)&lt;=max(左上，右上)
-   then l=mid+1
-   else r=mid
-</code></pre><p>然后稍微注意一下代码细节。如果直接二分x线权值我们不好让mid全为偶数。注意到题目并没有让我们输出x线y线，我们可以改为二分最后一个小于等于x线权值的点的横坐标。</p>
-<p>AC代码：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
+          <h1 id="这几个月的胡乱折腾"><a href="#这几个月的胡乱折腾" class="headerlink" title="这几个月的胡乱折腾"></a>这几个月的胡乱折腾</h1><p>我发现自己有点沉迷于工具，而忽略了真正重要的实在。</p>
+<p>为什么这么说呢？来细数我这几个月到底做了什么吧</p>
+<h2 id="学习双拼，鹤形"><a href="#学习双拼，鹤形" class="headerlink" title="学习双拼，鹤形"></a>学习双拼，鹤形</h2><p>这个其实还好，毕竟在打字效率上面真的有所提升，不过所花费的时间成本也是巨大的</p>
+<h2 id="折腾windows美化，主要在主题、壁纸和各种所谓的“提升幸福感”的小部件上"><a href="#折腾windows美化，主要在主题、壁纸和各种所谓的“提升幸福感”的小部件上" class="headerlink" title="折腾windows美化，主要在主题、壁纸和各种所谓的“提升幸福感”的小部件上"></a>折腾windows美化，主要在主题、壁纸和各种所谓的“提升幸福感”的小部件上</h2><p>这种东西就没有实质上的意义了。我花了数个小时来尝试不同的配色，每天去<a href="https://www.reddit.com/r/unixporn/" target="_blank" rel="noopener">unixporn</a>观看别人的配色方案，然后再琢磨是否合适……实际上我倒没有怎么改自己的配置，不过到最后发现人类永远只是复读机，流行的种类也就那么几样而已。</p>
+<p>唯一优点：我遇见了自己最喜欢的配色方案:Catppuccin。这个方案实在太优雅了</p>
+<h2 id="折腾终端"><a href="#折腾终端" class="headerlink" title="折腾终端"></a>折腾终端</h2><p>Windows Terminal, Starship 主题，各种没啥用但是很炫酷的特效（也是从unixporn学的）……</p>
+<p>考虑到自己以后的发展方向，说不定现在多玩玩这些也是不错的（笑）。然而，neofetch呀那些东西玩了也不知道有什么用……只是觉得炫酷而已。</p>
+<p>倒不如说，如果以后不从事这个方向才搞笑了，白忙活。不过真的很帅呀！终端什么的</p>
+<h2 id="折腾IDE"><a href="#折腾IDE" class="headerlink" title="折腾IDE"></a>折腾IDE</h2><p>首先是折腾VSCODE。这个倒不算是折腾吧？毕竟也就装装插件什么的，最初试用了一阵子的vim模式，感觉实在太难受就放弃了。直到我用vimium-C适应了vim式操作，才第一次感觉vscode的vim模式真不错。</p>
+<p>用vscode倒是不错，唯一的问题在于启动速度实在是 <strong>太 慢 了</strong>。之前还算是能忍受，但在这个充满折腾且喜新厌旧的学期，对我而言vscode已经不再是自己的首选了。于是，自然而然地，我切换到了sublime中。切换起来倒是挺无痛的，sublime本身的功能已经很完善了，并且，自带的包管理器为我省了很多事。第一次接触到了LSP的概念（其实VSCODE也有，只是包装的太好了我不需要调）。总的来说我对sublime还是相当满意的，只是之后又……开始折腾新的了</p>
+<h2 id="折腾TWM"><a href="#折腾TWM" class="headerlink" title="折腾TWM"></a>折腾TWM</h2><p>Tiling Window Manager… 没记错的话，第一次听见这个是在某个知乎专栏中。由于我对Linux与Mac并不熟悉，对于堆叠式这个概念可谓是一无所知。知乎专栏介绍的是Windows平台下的komorebi，正好，我就去试试呗。</p>
+<p>然后我就被其独特的思维方式惊呆了。倒不是“不允许重叠”或是“自动管理”令我惊奇，事实上，一个TWM如果只有窗口管理功能，那么它仍然只是一个废物。真正让人能够从使用鼠标的窗口管理解放出来的，是workspace这个概念。</p>
+<p>workspace才是真的让人不再需要考虑每一个窗口该放在哪儿，不再需要alt+tab半天才翻到自己需要的窗口。如果没有workspace，那么你在自动堆叠的窗口中移动也是一件相当痛苦的事情。有了workspace后，每个worspace中之后放上2~3个窗口，这才让键盘操作对比鼠标有了高效性。</p>
+<p>然而很遗憾的是，komorebi虽然是用rust编写，但不知道是不是由于与windows的交互机制比较特殊，可以说是相当之慢。除此之外，komorebi在处理windows的多种窗口（会缩略到system tray的，electron的）方面并不优秀。经过持之以恒（大概过了2天）的寻找，我又找到了一个满足我需求的TM。</p>
+<p>GlazeWM. 这个TMW在模仿i3方面做到很好（指功能比起现代TWM缺失了很多，不会自动alternate layout，没有monocle模式，没有办法stack window）。它足够轻量，并且窗口管理规则完善，没有必要像komorebi一样设置很多的例外。现在唯一令人担心的是，应用的某些子窗口（例如确定提示窗）如果设定成floating，而又有对其border size的设置，GlazeWM可能会在打开这些窗口时崩溃。</p>
+<p>不过总的来说，TWM是一个life improvement，我也很自豪自己在使用TWM。那么原先的堆叠式呢？其实我也并不讨厌，只是没法只用键盘令人感觉有点不适罢了。说不定过几年又和解了呢？</p>
+<h2 id="折腾AHK"><a href="#折腾AHK" class="headerlink" title="折腾AHK"></a>折腾AHK</h2><p>折腾AHK的需求最开始始于在使用GlazeWM时，无法分清现在所处的窗口到底是哪个。于是我找了一个给当前窗口绘制红色边框的ahk，在此基础上修改了一下，让它只在窗口切换时闪一下。这样就不错了。（说得轻巧但是当时花了大概2~3天才完成）</p>
+<p>接着在折腾终端时，又很不爽Windows Terminal在不处于焦点时无法保持透明度，于是在github上找到了相关讨论，用ahk让在创建Windows Terminal时自动设置了透明度。</p>
+<p>再之后呢……我意识到了ahk的强大，但找不到什么好用的了。</p>
+<p>哦，不对，倒是有一个巨大的收获: <a href="https://xianyukang.com/MyKeymap.html#mykeymap-%E7%AE%80%E4%BB%8B" target="_blank" rel="noopener">Mykeymap</a>，迄今为止最好用的由ahk编写的快捷键工具。现在我已经完全离不开它了。</p>
+<h2 id="折腾NeoVim"><a href="#折腾NeoVim" class="headerlink" title="折腾NeoVim"></a>折腾NeoVim</h2><p>最开始是为什么折腾呢？其实是我突然有一天有了在网页端编辑块打开vim的需求（事实证明，没有也无所谓，我之后也没用这个功能了，纯属白折腾），于是搜到了firenvim这个插件（很明显这个是给firefox用的吧，我一个edge用户为什么要来凑热闹），安装之后需要通过联动nvim进行使用。于是……又跳进了一个大坑中</p>
+<p>本来想着自己对于vim也算是熟悉了，neovim怎么说不会太折腾，结果lua又把我搞得焦虑了起来。最后还是放弃了从头配置，拿了Astronvim的配置，真香。</p>
+<p>我以前一直以为vim在window没有办法作为GUI得到良好的体验，所以一直是放在terminal中使用的。虽然知道有gvim，但是太丑了都不愿意尝试。这次换到了nvim，没想到还找到了Neovide这种体验优秀的GUI。我现在写的这段话就在neovide中写的。</p>
+<p>搭配astronvim强大的功能（太多了，toggleterm，telescope，neotree…如果我是从零配置可能永远也搞不懂这些，赞美开发者！），感觉nvim把从终端到编辑几乎IDE可以包含的东西都包括了，而且相当轻量高效。</p>
+<p>最后一步路就是编译了吧？想要运行cpp文件，我还是喜欢在sublime中一步build。不过这最后一步路我并不准备也让nvim给包了，大而全并不是nvim的发展方向。</p>
+<p>再赞美一次Neovide，因为Neovide的体验实在太丝滑了, <code>like a butter</code>，就算现在写Markdown需要预览我都忍了（事实证明所见即所得对于MD编写也是一个伪需求，不用也没大差别，除了latex编写），因为实在太丝滑了嘛！</p>
+<h1 id="最近最有幸福感的事情"><a href="#最近最有幸福感的事情" class="headerlink" title="最近最有幸福感的事情"></a>最近最有幸福感的事情</h1><p>无意间闯入了一个<a href="https://www.youtube.com/watch?v=Fj0qU3oZLD0&amp;ab_channel=cc17926" target="_blank" rel="noopener">Youtube直播间</a>，在播放The Weather Channel(TWC) 频道的天气预报……而其中的选曲，居然是上世纪90年代的Jazz风！</p>
+<p>听着轻快的风铃、极具动感的钢琴与爵士鼓，很难不让人的思绪飘向那个纸醉金迷、一切似乎都充满了阳光向上的90年代。顺便我也找了一下作曲者， Trammell Starks，真不错，虽然不认识但是真不错。用爬虫在Intenet Archieve Search下载了他为TWC写的三张专辑，我单方面宣布这是本月最佳专辑了！（说不定哪天也把这个放在博客呢）</p>
+<p>以及，作为补充，这个直播间的天气信息取自TWC官网，但是解码器和显示器都是自己写的，具体显示如下：</p>
+<p>技术宅！可怕！可畏口牙！</p>
+<h1 id="真真正正的随想：捕捉一些瞬间"><a href="#真真正正的随想：捕捉一些瞬间" class="headerlink" title="真真正正的随想：捕捉一些瞬间"></a>真真正正的随想：捕捉一些瞬间</h1><p>如果能做一个本地的音乐识别软件就好了，识别有没有我本地有的音乐</p>
+<p>……这种东西，是不是已经有了呢？</p>
+<p>我觉得自己有拖延症：指英语orentation都拖到周四了还是不愿意准备，明天就是呀！幸亏，现在改成线上了，我的压力倒没有那么大就是了。</p>
 
-inline int red(){
-    int x=0,f=1;char ch=getchar();for(;!isdigit(ch);ch=getchar())if(ch==&#39;-&#39;)f=-1;
-    for(;isdigit(ch);ch=getchar())x=x*10+ch-&#39;0&#39;;return x*f;
-}
-
-const int N = 1e5+10;
-const int INF = 0x3f3f3f3f;
-
-int n,res=INF,ans=INF;
-int ypos[N];
-
-struct point{int x,y;}p[N];
-bool cmp(point a,point b){return a.x&lt;b.x;}
-
-namespace Splay{
-    struct S{
-        int ch[N][2],fa[N],sze[N],cnt[N],val[N];
-        int root,tot;
-        #define ls(A) ch[A][0]
-        #define rs(A) ch[A][1]
-        void pushup(int x){sze[x]=sze[ls(x)]+sze[rs(x)]+cnt[x];}
-        void conect(int a,int p,int b){ch[a][p]=b,fa[b]=a;}
-        void rotate(int x){
-            int y=fa[x],z=fa[y],k=(rs(y)==x),w=(rs(z)==y);
-            conect(z,w,x),conect(y,k,ch[x][k^1]),conect(x,k^1,y);
-            pushup(y),pushup(x);
-        }
-        void splay(int x,int s){
-            while(fa[x]!=s){
-                int y=fa[x],z=fa[y],k=(ls(y)==x),w=(ls(z)==y);
-                if(z!=s)    rotate(k==w?y:x);
-                rotate(x);
-            }
-            if(!s)    root=x;
-        }
-        void insert(int tar){
-            int x=root,y=0;
-            while(x&amp;&amp;val[x]!=tar)    y=x,x=ch[x][tar&gt;val[x]];
-            if(x)    {++cnt[x],splay(x,0);return;}
-            x=++tot;
-            if(y)    ch[y][tar&gt;val[y]]=x;
-            fa[x]=y,sze[x]=cnt[x]=1,val[x]=tar;
-            splay(x,0);
-        }
-        void find(int tar){        
-            int x=root;if(!root)    return;
-            while(ch[x][tar&gt;val[x]]&amp;&amp;val[x]!=tar)    x=ch[x][tar&gt;val[x]];
-            splay(x,0);
-        }
-        int drive(int tar,int f){
-            find(tar);int x=root;
-            if(val[x]&gt;tar&amp;&amp;f)    return x;
-            if(val[x]&lt;tar&amp;&amp;!f)    return x;
-            x=ch[x][f];
-            while(ch[x][f^1])    x=ch[x][f^1];
-            return x;
-        }
-        void dereta(int tar){
-            int per=drive(tar,0),net=drive(tar,1);
-            splay(per,0),splay(net,per);    
-            int del=ls(net);
-            if(cnt[del]&gt;1)    --cnt[del],splay(del,0);
-            else    ls(net)=0;
-        }
-        int num(int tar){
-            find(tar);
-            return sze[ls(root)]+cnt[root];
-        }
-        int sum(){return sze[ls(root)]+sze[rs(root)]+cnt[root];}
-    }s[2];
-}
-
-//ld=left down lu=left up rd=right down ru=right up
-int check(int mid,int x){
-    int per=Splay::s[0].num(ypos[mid])-1,net=Splay::s[1].num(ypos[mid])-1;
-    int lef=Splay::s[0].sum()-2,rig=Splay::s[1].sum()-2;
-    int ld=per,lu=lef-ld,rd=net,ru=rig-rd;
-    if(max(ld,rd)&lt;=max(lu,ru))    return res=min(res,max(lu,ru)),1;
-    return 0;
-}
-
-int main(){
-    n=red();
-    for(int i=1;i&lt;=n;++i)
-        p[i].x=red(),p[i].y=ypos[i]=red();
-    sort(p+1,p+n+1,cmp);sort(ypos+1,ypos+n+1);
-    Splay::s[0].insert(-1e9),Splay::s[0].insert(1e9);
-    Splay::s[1].insert(-1e9),Splay::s[1].insert(1e9);
-    for(int i=1;i&lt;=n;++i)    Splay::s[1].insert(p[i].y);
-    for(int i=1,cnt=1;i&lt;=n;++i){
-        while(p[cnt].x&lt;=p[i].x&amp;&amp;cnt&lt;=n)    Splay::s[0].insert(p[cnt].y),Splay::s[1].dereta(p[cnt++].y);
-        int l=1,r=n;res=INF;
-        while(l+1&lt;=r){
-            int mid=l+r&gt;&gt;1;
-            if(check(mid,cnt-1))    l=mid+1;
-            else                    r=mid;
-        }
-        ans=min(ans,res);
-    }
-    printf(&quot;%d&quot;,ans);
-    return 0;
-}
-</code></pre>
         </div>
         <!-- .entry-content -->
         <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
@@ -456,15 +371,15 @@ int main(){
           
             <div class="post-nepre half previous">
           
-            <a href="/2019/10/29/09/" rel="prev">
+            <a href="/2022/11/13/20/" rel="prev">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki5.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki5.webp">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/dragonlady.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/dragonlady.webp">
               </div>
               <span class="label">
               Previous Post</span>
               <div class="info">
                 <h3>
-                NOIP2013 火柴排队 题解</h3>
+                在WSL环境下使用ranger的两个小技巧</h3>
                 <hr>
               </div>
             </a>
@@ -474,15 +389,15 @@ int main(){
           
             <div class="post-nepre half next">
           
-            <a href="/2019/10/15/07/" rel="next">
+            <a href="/2021/10/03/18/" rel="next">
               <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/others/shina.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/others/shina.webp">
+                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/usagineko.jpg" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/usagineko.jpg">
               </div>
               <span class="label">
               Next Post</span>
               <div class="info">
                 <h3>
-                Hexo 建站指北</h3>
+                个人看过的TRPG回放动画盘点</h3>
                 <hr>
               </div>
             </a>
@@ -523,11 +438,6 @@ int main(){
   </div><!-- #primary -->
 </div>
 
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
 
 
     </div>    

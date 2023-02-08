@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   
-  <title itemprop="name">USACO16FEB Load Balancing Platinum 题解 | Blog - 不安きのこ -</title>
+  <title itemprop="name">archive_a: 2022/11 | Blog - 不安きのこ -</title>
   
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/favicon/bitbug_favicon2.ico">
   
@@ -280,255 +280,347 @@
   </div>
 </header>
 
-      <link rel="stylesheet" type="text/css" href="/css/sharejs.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
-<div class="pattern-center-blank"></div>
-
-  <div class="pattern-center single-center">
-    <!-- 有配图默认渲染第一张 -->
-    <div class="pattern-attachment-img lazyload" style="background-image: url(https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki8.webp);" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki8.webp">
-    </div>
-    <header class="pattern-header single-header">
-      <h1 class="entry-title">
-      USACO16FEB Load Balancing Platinum 题解</h1>
-      <p class="entry-census">
-        <span>
-          <a href="https://fuann-kinoko.github.io/">
-            <img src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/avatar/avater-tsuki.png">
-          </a>
-        </span>
-        <span>
-          <a href="https://fuann-kinoko.github.io/">不安きのこ</a>
-        </span>
-        <span class="bull">
-        ·</span>
-        2019-10-21<span class="bull">
-        ·</span>
-      <span id="busuanzi_value_page_pv"></span>次阅读</p>
-    </header>
-  </div>
-
-<div id="content" class="site-content">
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-      <article id="post-1" class="post-1 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
-        <div class="toc"></div>
-        <!--<div class="toc-entry-content"><!-- 套嵌目录使用（主要为了支援评论）-->
-        
-        <div class="entry-content">
-          
-          <p><center><font color=gray size=3>若数学公式无法显现请自行刷新</font></center></p><br><br><br>
-          
-          <p>传送门：<a href="https://www.luogu.org/problem/P3138" target="_blank" rel="noopener">Load Balancing_Silver</a> </p>
-<p>传送门的题面虽然是Silver，但和Platinum的区别也只在数据范围，所以看题面看水谷就行了。Platinum的数据范围是1E5，此解法也可AC</p>
-<p>看了一眼题，先敲了60行splay，再认真看题……卧槽根本不用平衡树。但是既然都写了……不用就太吃亏了。这里就写下平衡树解法吧。</p>
-<p>首先标准的二分，看不出来请自裁。令x线指与y轴平行的线，y线指与x轴平行的线。我们发现不能二分套二分的来求x线和y线，因为这两个在一起并不满足单调性。</p>
-<p>看一下数据范围，如果是$Nlog(N)$或者$Nlog^2(N)$应该还是能够接受的。考虑枚举x线，二分y线，这时候我们需要的就是两棵平衡树，L存着在x线左侧的所有点的y坐标，另一棵R存着在x线右侧的所有点的y坐标。每次x线向后移时，只需要在L中插入一些，在R中删除一些即可。</p>
-<p>至于为什么二分y线就是满足单调的呢？这点稍微画下图就能明白。check的条件也就是</p>
-<pre><code>if max(左下，右下)&lt;=max(左上，右上)
-   then l=mid+1
-   else r=mid
-</code></pre><p>然后稍微注意一下代码细节。如果直接二分x线权值我们不好让mid全为偶数。注意到题目并没有让我们输出x线y线，我们可以改为二分最后一个小于等于x线权值的点的横坐标。</p>
-<p>AC代码：</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-inline int red(){
-    int x=0,f=1;char ch=getchar();for(;!isdigit(ch);ch=getchar())if(ch==&#39;-&#39;)f=-1;
-    for(;isdigit(ch);ch=getchar())x=x*10+ch-&#39;0&#39;;return x*f;
-}
-
-const int N = 1e5+10;
-const int INF = 0x3f3f3f3f;
-
-int n,res=INF,ans=INF;
-int ypos[N];
-
-struct point{int x,y;}p[N];
-bool cmp(point a,point b){return a.x&lt;b.x;}
-
-namespace Splay{
-    struct S{
-        int ch[N][2],fa[N],sze[N],cnt[N],val[N];
-        int root,tot;
-        #define ls(A) ch[A][0]
-        #define rs(A) ch[A][1]
-        void pushup(int x){sze[x]=sze[ls(x)]+sze[rs(x)]+cnt[x];}
-        void conect(int a,int p,int b){ch[a][p]=b,fa[b]=a;}
-        void rotate(int x){
-            int y=fa[x],z=fa[y],k=(rs(y)==x),w=(rs(z)==y);
-            conect(z,w,x),conect(y,k,ch[x][k^1]),conect(x,k^1,y);
-            pushup(y),pushup(x);
-        }
-        void splay(int x,int s){
-            while(fa[x]!=s){
-                int y=fa[x],z=fa[y],k=(ls(y)==x),w=(ls(z)==y);
-                if(z!=s)    rotate(k==w?y:x);
-                rotate(x);
-            }
-            if(!s)    root=x;
-        }
-        void insert(int tar){
-            int x=root,y=0;
-            while(x&amp;&amp;val[x]!=tar)    y=x,x=ch[x][tar&gt;val[x]];
-            if(x)    {++cnt[x],splay(x,0);return;}
-            x=++tot;
-            if(y)    ch[y][tar&gt;val[y]]=x;
-            fa[x]=y,sze[x]=cnt[x]=1,val[x]=tar;
-            splay(x,0);
-        }
-        void find(int tar){        
-            int x=root;if(!root)    return;
-            while(ch[x][tar&gt;val[x]]&amp;&amp;val[x]!=tar)    x=ch[x][tar&gt;val[x]];
-            splay(x,0);
-        }
-        int drive(int tar,int f){
-            find(tar);int x=root;
-            if(val[x]&gt;tar&amp;&amp;f)    return x;
-            if(val[x]&lt;tar&amp;&amp;!f)    return x;
-            x=ch[x][f];
-            while(ch[x][f^1])    x=ch[x][f^1];
-            return x;
-        }
-        void dereta(int tar){
-            int per=drive(tar,0),net=drive(tar,1);
-            splay(per,0),splay(net,per);    
-            int del=ls(net);
-            if(cnt[del]&gt;1)    --cnt[del],splay(del,0);
-            else    ls(net)=0;
-        }
-        int num(int tar){
-            find(tar);
-            return sze[ls(root)]+cnt[root];
-        }
-        int sum(){return sze[ls(root)]+sze[rs(root)]+cnt[root];}
-    }s[2];
-}
-
-//ld=left down lu=left up rd=right down ru=right up
-int check(int mid,int x){
-    int per=Splay::s[0].num(ypos[mid])-1,net=Splay::s[1].num(ypos[mid])-1;
-    int lef=Splay::s[0].sum()-2,rig=Splay::s[1].sum()-2;
-    int ld=per,lu=lef-ld,rd=net,ru=rig-rd;
-    if(max(ld,rd)&lt;=max(lu,ru))    return res=min(res,max(lu,ru)),1;
-    return 0;
-}
-
-int main(){
-    n=red();
-    for(int i=1;i&lt;=n;++i)
-        p[i].x=red(),p[i].y=ypos[i]=red();
-    sort(p+1,p+n+1,cmp);sort(ypos+1,ypos+n+1);
-    Splay::s[0].insert(-1e9),Splay::s[0].insert(1e9);
-    Splay::s[1].insert(-1e9),Splay::s[1].insert(1e9);
-    for(int i=1;i&lt;=n;++i)    Splay::s[1].insert(p[i].y);
-    for(int i=1,cnt=1;i&lt;=n;++i){
-        while(p[cnt].x&lt;=p[i].x&amp;&amp;cnt&lt;=n)    Splay::s[0].insert(p[cnt].y),Splay::s[1].dereta(p[cnt++].y);
-        int l=1,r=n;res=INF;
-        while(l+1&lt;=r){
-            int mid=l+r&gt;&gt;1;
-            if(check(mid,cnt-1))    l=mid+1;
-            else                    r=mid;
-        }
-        ans=min(ans,res);
-    }
-    printf(&quot;%d&quot;,ans);
-    return 0;
-}
-</code></pre>
-        </div>
-        <!-- .entry-content -->
-        <div style="text-align:center; width: 100%" class="social-share share-mobile" data-disabled="diandian, tencent"></div>
-        <footer class="post-footer">
-          <div class="post-lincenses"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="nofollow"><i class="fa fa-creative-commons" aria-hidden="true"></i> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a></div>
-          <div class="post-tags">
-          </div>
-          <div class="post-share">
-            <div class="social-share sharehidden share-component"></div>
-            <i class="iconfont show-share icon-forward"></i>
-          </div>
-        </footer><!-- .entry-footer -->
-      </article>
-      <!-- #post-## -->
-      <div class="toc" style="background: none;"></div>
-      <section class="post-squares nextprev">
-        
-          
-            <div class="post-nepre half previous">
-          
-            <a href="/2019/10/29/09/" rel="prev">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki5.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/ribuyuuki/ribuyuuki5.webp">
-              </div>
-              <span class="label">
-              Previous Post</span>
-              <div class="info">
-                <h3>
-                NOIP2013 火柴排队 题解</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-        
-          
-            <div class="post-nepre half next">
-          
-            <a href="/2019/10/15/07/" rel="next">
-              <div class="background">
-                <img class="lazyload" src="https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/loader/orange.progress-bar-stripe-loader.svg" data-src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/others/shina.webp" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/others/shina.webp">
-              </div>
-              <span class="label">
-              Next Post</span>
-              <div class="info">
-                <h3>
-                Hexo 建站指北</h3>
-                <hr>
-              </div>
-            </a>
-          </div>
-        
-      </section>
-      
-  <script src="https://cdn.jsdelivr.net/gh/yremp/yremp-js@1.1/gitalk.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yremp/yremp-css@1.3/gitalk.css">
-  <div id="gitalk-container"></div>
-  <!-- <script type="text/javascript">
-      var gitalk = new Gitalk({
-          clientID: 'ec9b058fe1ac5ff50321',
-          clientSecret: 'c15b5207147bf6307553ec6f3ed08147a941d30b',
-          id: window.location.pathname,
-          repo: 'Fuann-Kinoko.github.io',
-          owner: 'Fuann-Kinoko',
-          admin: 'Fuann-Kinoko'
-          // proxy: 'https://shielded-brushlands-08810.herokuapp.com/https://github.com/login/oauth/access_token'
-      })
-      gitalk.render('gitalk-container')
-    </script> -->
-
-      <section class="author-profile">
-        <div class="info" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-          <a href="https://fuann-kinoko.github.io/" class="profile gravatar"><img src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/avatar/avater-tsuki.png" itemprop="image" alt="不安きのこ" height="70" width="70"></a>
-          <div class="meta">
-            <span class="title">Author</span>
-            <h3 itemprop="name">
-            <a href="https://fuann-kinoko.github.io/" itemprop="url" rel="author">不安きのこ</a>
-            </h3>
-          </div>
-        </div>
-        <hr>
-        <p><i class="iconfont icon-write"></i></p>
-      </section>
-    </main><!-- #main -->
-  </div><!-- #primary -->
+      <div class="blank" style="padding-top: 75px;">
 </div>
-
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-  </script>
-
+<div id="content" class="site-content">
+  <div id="main">
+    <header class="page-header">
+      <h1 class="cat-title">
+      归档</h1>
+      <span class="cat-des">
+        <p>
+        Archives</p>
+      </span>
+    </header>
+    <div id="main-part">
+      <article class="art">
+        <div class="art-main">
+          <div class="art-content">
+            <div id="archives">
+              <p style="text-align:right;">
+                [<span id="al_expand_collapse" style="cursor: s-resize;">
+                全部展开/收缩</span>
+              ]</p>
+              
+              
+              
+              
+              
+                
+                <h3 class="al_year">2022年</h3>
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      11月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2022/11/13/20/">
+                          <span style="color:#0bf;">
+                          13日12:20:13</span>
+                          在WSL环境下使用ranger的两个小技巧
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2022/11/02/19/">
+                          <span style="color:#0bf;">
+                          02日23:57:01</span>
+                          随想
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+              
+              
+              
+                
+                <h3 class="al_year">2021年</h3>
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      10月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2021/10/03/18/">
+                          <span style="color:#0bf;">
+                          03日16:13:50</span>
+                          个人看过的TRPG回放动画盘点
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+              
+              
+              
+                
+                <h3 class="al_year">2020年</h3>
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      08月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2020/08/07/17/">
+                          <span style="color:#0bf;">
+                          07日23:55:36</span>
+                          个人同步到Mega的同人志和散图
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+              
+              
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      02月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2020/02/09/15/">
+                          <span style="color:#0bf;">
+                          09日14:17:41</span>
+                          有关C(n+k-1,2k-1)的代数意义及证明
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+              
+              
+              
+                
+                <h3 class="al_year">2019年</h3>
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      11月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2019/11/08/14/">
+                          <span style="color:#0bf;">
+                          08日22:43:36</span>
+                          CSP-S测试 药品试验 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/11/07/12/">
+                          <span style="color:#0bf;">
+                          07日22:50:57</span>
+                          NOI2018 归程 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/11/01/11/">
+                          <span style="color:#0bf;">
+                          01日23:16:54</span>
+                          CSP-S测试 层层回忆 题解
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+              
+              
+              
+              
+                
+                <ul class="al_mon_list">
+                  <li class="al_li">
+                    <span class="al_mon" style="cursor: s-resize;">
+                      10月(<span id="post-num">
+                      3</span>
+                    篇文章)</span>
+                    <ul class="al_post_list" style="">
+              
+                      <li>
+                        <a href="/2019/10/31/10/">
+                          <span style="color:#0bf;">
+                          31日23:15:44</span>
+                          音游成长记录
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/29/09/">
+                          <span style="color:#0bf;">
+                          29日00:05:26</span>
+                          NOIP2013 火柴排队 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/21/08/">
+                          <span style="color:#0bf;">
+                          21日23:12:22</span>
+                          USACO16FEB Load Balancing Platinum 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/15/07/">
+                          <span style="color:#0bf;">
+                          15日23:50:02</span>
+                          Hexo 建站指北
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/15/06/">
+                          <span style="color:#0bf;">
+                          15日23:01:54</span>
+                          Luogu P2123 皇后游戏 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/11/05/">
+                          <span style="color:#0bf;">
+                          11日23:05:05</span>
+                          CF402D 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/07/04/">
+                          <span style="color:#0bf;">
+                          07日17:43:33</span>
+                          BZOJ4499 【改】 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/05/03/">
+                          <span style="color:#0bf;">
+                          05日18:39:17</span>
+                          CF731E 题解
+                        </a>
+                      </li>
+                      
+              
+              
+              
+              
+              
+                      <li>
+                        <a href="/2019/10/04/01/">
+                          <span style="color:#0bf;">
+                          04日21:46:20</span>
+                          HELLO WORLD
+                        </a>
+                      </li>
+                      
+                    </ul>
+                  </li>
+                </ul>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
 
     </div>    
     <div class="ins-search">
