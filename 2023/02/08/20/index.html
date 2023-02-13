@@ -382,6 +382,24 @@
 }
 </code></pre>
 <p>至此跳转问题告一段落</p>
+<p>还有一个恼人的细节，在于执行<code>exe</code>之后焦点会自动跳转到TOTALCMD上，有时这并不是所需要的</p>
+<p>转移焦点到刚刚执行的<code>Windows Powershell</code>上：</p>
+<pre><code class="lang-powershell">        $wshell = New-Object -ComObject wscript.shell
+        $wshell.AppActivate(&#39;Windows Powershell&#39;) # 焦点转移
+</code></pre>
+<p>虽然确实转回来了，但是在<code>exe</code>执行完成之前……这导致并没有达到原先想要的效果</p>
+<p>要强制在exe结束后执行下一句的话，要利用到一个trick：</p>
+<pre><code class="lang-powerhsell">xxx.exe | Out-Null
+</code></pre>
+<p>虽然输出到了Null中，但刚好管道本身的特点保证了exe需要执行完毕</p>
+<p>于是，最终的版本就是这样：</p>
+<pre><code class="lang-powershell">        [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 # 不加这句wslpath只会输出UTF-8，导致在通过pipeline时让中文乱码
+        wsl ranger --choosedir=/mnt/c/Users/DELL/ranger_location # 将ranger退出时的路径输出至ranger_location
+        wsl --exec wslpath -w $(cat ~\ranger_location) | cd      # 读取ranger_location中的路径，转换成windows路径，在powershell中跳转
+        D:\totalcmd\TotalCMD64.exe /O /S $(wsl --exec wslpath -w $(cat ~\ranger_location)) | Out-Null # 通过pipeline trick使得只有执行完exe后才会进入下一句
+        $wshell = New-Object -ComObject wscript.shell
+        $wshell.AppActivate(&#39;Windows Powershell&#39;) # 改变focus的窗口
+</code></pre>
 <h1 id="技巧2：用windows默认程序打开软件"><a href="#技巧2：用windows默认程序打开软件" class="headerlink" title="技巧2：用windows默认程序打开软件"></a>技巧2：用windows默认程序打开软件</h1><p>主要参考这篇：<a href="https://gist.github.com/TaipanRex/5db9a19304743fe6367b9ef291d2b69b" target="_blank" rel="noopener">How to launch Windows applications from Ranger in Windows Subsystem for Linux (WSL)</a></p>
 <p>在删掉<code>rifle.conf</code>的原有默认配置前提下，复制粘贴以下代码</p>
 <pre><code class="lang-shell">ext ods?|xls?|xlsx?|csv?|ics?|vcf?|3dm?|3ds?|max?|bmp?|dds?|gif?|jpg?|jpeg?|png?|psd?|xcf?|tga?|thm?|tif?|tiff?|yuv?|ai?|eps?|ps?|svg?|dwg?|dxf?|gpx?|kml?|kmz?|webp?|3g2?|3gp?|aaf?|asf?|avchd?|avi?|drc?|flv?|m2v?|m4p?|m4v?|mkv?|mng?|mov?|mp2?|mp4?|mpe?|mpeg?|mpg?|mpv?|mxf?|nsv?|ogg?|ogv?|ogm?|qt?|rm?|rmvb?|roq?|srt?|svi?|vob?|webm?|wmv?|yuv?|aac?|aiff?|ape?|au?|flac?|gsm?|it?|m3u?|m4a?|mid?|mod?|mp3?|mpa?|pls?|ra?|s3m?|sid?|wav?|wma?|xm?|7z?|a?|apk?|ar?|bz2?|cab?|cpio?|deb?|dmg?|egg?|gz?|iso?|jar?|lha?|mar?|pea?|rar?|rpm?|s7z?|shar?|tar?|tbz2?|tgz?|tlz?|war?|whl?|xpi?|zip?|zipx?|xz?|pak?|exe?|msi?|bin?|command?|sh?|bat?|crx?|c?|cc?|class?|clj?|cpp?|cs?|cxx?|el?|go?|h?|java?|lua?|m?|m4?|php?|pl?|po?|py?|rb?|rs?|sh?|swift?|vb?|vcxproj?|xcodeproj?|xml?|diff?|patch?|html?|js?|html?|htm?|css?|js?|jsx?|less?|scss?|wasm?|php?|ppt?|odp?|doc?|docx?|ebook?|log?|md?|msg?|odt?|org?|pages?|pdf?|rtf?|rst?|tex?|txt?|wpd?|wps?|mobi?|epub?|azw1?|azw3?|azw4?|azw6?|azw?|cbr?|cbz?| = wslpath -w &quot;$@&quot; | sed -e &#39;s/.*/&quot;&amp;&quot;/&#39; | xargs cmd.exe /C start &quot;&quot;
