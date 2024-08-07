@@ -1,0 +1,50 @@
+{{ define "main" }}
+<div class="headertop filter-dot" style="height: auto;">
+  <div id="banner_wave_1" style="left: -1233px;"></div>
+  <div id="banner_wave_2" style="left: -1009px;"></div>
+  <figure id="centerbg" class="centerbg" style="background-image: url(&quot;https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/Covers/116.webp&quot;); height: 650px;">
+  </figure>
+</div>
+
+<div id="primary" class="content-area">
+  <div id="content-articles">
+    <div id="content" class="site-content">
+      {{ $index := 0 }}
+      {{ range .Paginator.Pages }}
+      <article class="post post-list-thumb {{ if eq (mod $index 2) 0 }}post-list-thumb-left{{ else }}post-list-thumb-right{{ end }}">
+        <div class="post-thumbnail">
+          <a href="{{ .Permalink }}">
+            {{ with .Params.thumbnail }}
+            <img src="{{ . }}" alt="{{ $.Title }}">
+            {{ else }}
+            <img src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" alt="{{ $.Title }}">
+            {{ end }}
+          </a>
+        </div>
+        <div class="post-content-wrap">
+          <div class="post-content">
+            <span class="post-date">{{ .Date.Format "2006 01 2" }}</span>
+            <h3 class="post-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h3>
+            <div class="post-meta">
+              <span class="post-tags">
+                {{ range .Params.tags }}
+                <a href="{{ "tags" | relURL }}/{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </article>
+      {{ $index = add $index 1 }}
+      {{ end }}
+    </div>
+  </div>
+  <div id="pagination">
+    {{ if .Paginator.HasNext }}
+      <a href="{{ .Paginator.Next.URL }}" class="nextpage">Load More</a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

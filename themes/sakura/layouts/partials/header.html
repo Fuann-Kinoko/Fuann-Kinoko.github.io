@@ -1,0 +1,7 @@
+<div class="header-hideable-content">
+  <h2 style="margin-bottom: auto; margin-top: 20px; margin-left: 40px;">
+      <a href="{{ "/" | relURL }}">{{ .Site.Title }}</a>
+  </h2>
+  {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  <script src="{{ "/js/hide_header.js" | urlize | relURL }}"></script>
+</div>

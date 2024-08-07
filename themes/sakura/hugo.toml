@@ -1,0 +1,52 @@
+baseURL = 'https://example.org/'
+languageCode = 'en-US'
+title = '不安きのこ'
+
+[[menus.main]]
+name = 'Home'
+pageRef = '/'
+weight = 10
+
+[[menus.main]]
+name = 'Posts'
+pageRef = '/posts'
+weight = 20
+
+[[menus.main]]
+name = 'Tags'
+pageRef = '/tags'
+weight = 30
+
+[module]
+  [module.hugoVersion]
+    extended = false
+    min = "0.116.0"
+
+
+[pagination]
+  disableAliases = false
+  pagerSize = 1
+  path = 'page'
+
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    noHl = false
+    style = 'monokai'
+    tabWidth = 4
+
+[params]
+  [params.Images]
+    section = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/thoughts.webp"
+    taxonomy = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/thoughts.webp"
+    terms = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/thoughts.webp"

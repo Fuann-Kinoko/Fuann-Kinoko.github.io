@@ -1,0 +1,27 @@
+{{- $index := .index }}
+{{- $entry := .entry }}
+
+<article class="post-list">
+  <div class="post-entry">
+    <div class="feature">
+      <a href="{{ $entry.Permalink }}">
+        {{ $defaultImage := "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" }}
+        {{ $entryImage := $entry.Params.thumbnail | default $defaultImage }}
+          {{ if . }}
+            <img width="150" height="150" src="{{ $entryImage }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-fit: cover;">
+          {{ end }}
+      </a>
+    </div>
+    <h1 class="entry-title">
+      <a href="{{ $entry.Permalink }}">
+        {{ $entry.Title }}
+      </a>
+    </h1>
+    <div class="p-time">
+      <i class="iconfont icon-time"></i>
+      {{ $entry.Date.Format "2006-01-02" }}
+    </div>
+    <p>{{ $entry.Params.description }}</p>
+  </div>
+  <hr>
+</article>

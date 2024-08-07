@@ -1,0 +1,105 @@
+{{/*
+    {{ define "main" }}
+      <h1>{{ .Title }}</h1>
+
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+
+      {{ .Content }}
+      {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+    {{ end }}
+*/}}
+
+{{define "main"}}
+    <!-- 文章页面 -->
+    <div class="pattern-center-blank"></div>
+
+    {{ $defaultImage := "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" }}
+    {{ $thumbnail := .Params.thumbnail | default $defaultImage }}
+    <div class="pattern-center single-center">
+        <!-- 配图或备用图片 -->
+        <div class="pattern-attachment-img lazyload" style="background-image: url({{ $thumbnail }});" src="{{ $thumbnail }}" data-src="{{ $thumbnail }}"></div>
+        <header class="pattern-header single-header">
+            <h1 class="entry-title">{{ .Title }}</h1>
+            <p class="entry-census">
+                <span>
+                    <a href="{{ .Params.authorLink }}">
+                        <img src="{{ .Params.avatar | default "" }}">
+                    </a>
+                </span>
+                <span>
+                    <a href="{{ .Params.authorLink }}">{{ .Params.author }}</a>
+                </span>
+                <span class="bull">·</span>
+                {{ .Date.Format "2006-01-02" }}<span class="bull">·</span>
+            </p>
+        </header>
+    </div>
+
+    <div id="content" class="site-content">
+        <div id="primary" class="content-area">
+            <main id="main" class="site-main" role="main">
+                <article id="post" class="format-standard hentry">
+                    {{ with .Params.thumbnail }}
+                        {{ if not (index . 0) }}
+                            <header class="entry-header">
+                                <h1 class="entry-title">{{ .Title }}</h1>
+                                <p class="entry-census">{{ .Params.author }} · {{ .Date.Format "2006-01-02" }} · <span id="busuanzi_value_page_pv"></span>次阅读</p>
+                                <hr>
+                            </header>
+                        {{ end }}
+                    {{ end }}
+
+                    <div class="entry-content">
+                        {{ .Content }}
+                    </div>
+
+                    <!-- <footer class="post-footer"> -->
+                    <!--     <div class="post-tags"> -->
+                    <!--         <\!-- Post tags can be added here -\-> -->
+                    <!--     </div> -->
+                    <!-- </footer> -->
+
+                </article>
+
+                <section class="post-squares nextprev">
+                    {{ if .Prev }}
+                        {{ $prevThumbnail := .Prev.Params.thumbnail | default $defaultImage }}
+                        <div class="post-nepre {{ if not .Next }}full{{ else }}half{{ end }} previous">
+                            <a href="{{ .Prev.Permalink }}" rel="prev">
+                                <div class="background">
+                                    <img class="lazyload" data-src="{{ $prevThumbnail }}" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="{{ $prevThumbnail }}">
+                                </div>
+                                <span class="label">Previous Post</span>
+                                <div class="info">
+                                    <h3>{{ .Prev.Title }}</h3>
+                                    <hr>
+                                </div>
+                            </a>
+                        </div>
+                    {{ end }}
+
+                    {{ if .Next }}
+                        {{ $nextThumbnail := .Next.Params.thumbnail | default $defaultImage }}
+                        <div class="post-nepre {{ if not .Prev }}full{{ else }}half{{ end }} next">
+                            <a href="{{ .Next.Permalink }}" rel="next">
+                                <div class="background">
+                                    <img class="lazyload" data-src="{{ $nextThumbnail }}" style="width: 100%; height: 100%; object-fit: cover; pointer-events: none;" onerror="imgError(this,3)" src="{{ $nextThumbnail }}">
+                                </div>
+                                <span class="label">Next Post</span>
+                                <div class="info">
+                                    <h3>{{ .Next.Title }}</h3>
+                                    <hr>
+                                </div>
+                            </a>
+                        </div>
+                    {{ end }}
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- 其他内容 -->
+{{end}}

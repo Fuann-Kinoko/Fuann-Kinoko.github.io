@@ -1,0 +1,54 @@
+{{ define "main" }}
+
+  <div class="pattern-center-blank"></div>
+  {{ $defaultImage := "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" }}
+  {{- $listImage := "" -}}
+  {{- if eq .Kind "section" -}}
+      {{- $listImage = .Site.Params.Images.section | default $defaultImage -}}
+  {{- else if eq .Kind "taxonomy" -}}
+      {{- $listImage = .Site.Params.Images.taxonomy | default $defaultImage -}}
+  {{- else if eq .Kind "terms" -}}
+      {{- $listImage = .Site.Params.Images.term | default $defaultImage -}}
+  {{- else -}}
+      {{- $listImage = $defaultImage -}}
+  {{- end -}}
+  <div class="pattern-center single-center">
+    <!-- 配图或备用图片 -->
+    <div class="pattern-attachment-img lazyload" style="background-image: url({{ $listImage }});" src="{{ $listImage }}" data-src="{{ $listImage }}"></div>
+    <header class="pattern-header ">
+      <h1 class="cat-title">{{ .Title }}</h1>
+    </header>
+  </div>
+
+
+  <div id="content-list">
+  <div id="content" class="site-content">
+    <div id="primary" class="content-area">
+      <main id="main" class="site-main" role="main">
+        <!-- 首页默认取最最新文章集 -->
+        {{ range $index, $entry := .Paginator.Pages }}
+          {{ partial "list-entries.html" (dict "index" $index "entry" $entry) }}
+        {{ end }}
+
+        <div class="clearer"></div>
+      </main>
+    </div>
+  </div>
+  </div>
+
+  <div id="pagination">
+    {{ if .Paginator.HasNext }}
+      <a href="{{ .Paginator.Next.URL }}" class="nextpage">Load More</a>
+    {{ end }}
+  </div>
+{{ end }}
+
+{{/*
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  {{ range .Pages }}
+    <h2><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></h2>
+    {{ .Summary }}
+  {{ end }}
+{{ end }}
+*/}}
