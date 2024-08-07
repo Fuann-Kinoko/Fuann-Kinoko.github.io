@@ -47,6 +47,6 @@ weight = 30
 
 [params]
   [params.Images]
-    section = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/thoughts.webp"
-    taxonomy = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/thoughts.webp"
-    terms = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/thoughts.webp"
+    section = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
+    taxonomy = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
+    terms = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"

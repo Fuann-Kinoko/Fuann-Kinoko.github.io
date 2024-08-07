@@ -1,4 +1,43 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = '不安きのこ'
 theme = 'sakura'
+
+
+[pagination]
+  disableAliases = false
+  pagerSize = 10
+  path = 'page'
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = false
+    hl_Lines = ''
+    hl_inline = false
+    lineAnchors = ''
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    noHl = false
+    style = 'monokai'
+    tabWidth = 4
+  [markup.goldmark.renderer]
+    # to enable ox-hugo emacs org mode experience
+    unsafe = true
+  [markup.goldmark.extensions]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [['\[', '\]'], ['$$', '$$']]
+        inline = [['\(', '\)'], ['$', '$']]
+
+
+[params]
+  math = true
+  [params.Images]
+    section = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
+    taxonomy = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
+    terms = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"

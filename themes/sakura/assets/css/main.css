@@ -1063,18 +1063,17 @@ h1.cat-title {
   border-right: 1px dashed #ddd;
   color: #676767;
 }
-.icon-text::before {
-  content: "\e6b2";
-}
-.icon-time::before {
-  content: "\e689";
-}
+/* .icon-text::before { */
+/*   content: "\e6b2"; */
+/* } */
+/* .icon-time::before { */
+/*   content: "\e689"; */
+/* } */
 .p-time i {
   font-size: 14px;
   margin-right: 5px;
 }
 .iconfont {
-  font-family: "iconfont" !important;
   font-size: 20px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -1109,6 +1108,7 @@ h1.cat-title {
   color: #504e4e;
 }
 .p-time {
+  display: contents;
   position: absolute;
   right: 0;
   top: 16px;

@@ -4,4 +4,7 @@
   </h2>
   {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
   <script src="{{ "/js/hide_header.js" | urlize | relURL }}"></script>
+  {{ if .Param "math" }}
+    {{ partialCached "math.html" . }}
+  {{ end }}
 </div>

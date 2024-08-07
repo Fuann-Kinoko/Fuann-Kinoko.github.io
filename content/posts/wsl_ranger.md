@@ -1,23 +1,18 @@
 +++
-title = 'Post 3 Very Long Title is What you need'
-date = 2023-03-15T11:00:00-07:00
-draft = false
-tags = ['red','green','blue']
+title = "在WSL环境下使用ranger的两个小技巧"
 thumbnail = 'https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/dragonlady.webp'
+date = 2023-02-08
+tags = ["记录", "WSL", "linux"]
+description = ""
 +++
 
-Occaecat aliqua consequat laborum ut ex aute aliqua culpa quis irure esse magna dolore quis. Proident fugiat labore eu laboris officia Lorem enim. Ipsum occaecat cillum ut tempor id sint aliqua incididunt nisi incididunt reprehenderit. Voluptate ad minim sint est aute aliquip esse occaecat tempor officia qui sunt. Aute ex ipsum id ut in est velit est laborum incididunt. Aliqua qui id do esse sunt eiusmod id deserunt eu nostrud aute sit ipsum. Deserunt esse cillum Lorem non magna adipisicing mollit amet consequat.
-
-![Bryce Canyon National Park](bryce-canyon.jpg)
-
-Sit excepteur do velit veniam mollit in nostrud laboris incididunt ea. Amet eu cillum ut reprehenderit culpa aliquip labore laborum amet sit sit duis. Laborum id proident nostrud dolore laborum reprehenderit quis mollit nulla amet veniam officia id id. Aliquip in deserunt qui magna duis qui pariatur officia sunt deserunt.
 # 前言
 
 由于在Linux环境下没有Total Commander的替代品，于是用上了[ranger](https://github.com/ranger/ranger)。没想到现在回到Windows环境下，居然感觉Ranger比TC还要顺手了
 
 那没办法——只好在WSL环境下装个Ranger凑合用用
 
-（注：我不用[lf](https://github.com/gokcehan/lf)，是因为在我一年前尝试的时候，发现它显示中文有bug）
+（注：不用[lf](https://github.com/gokcehan/lf)，是因为在一年前尝试的时候，发现它显示中文有bug）
 
 # 下载安装
 
@@ -53,7 +48,6 @@ ranger --copy-config=all
 本身ranger退出时的跳转实现有几种：
 
 1. **大写S**
-
     这实际上并不是跳转了目录，而只是在当前目录下又套了一层终端。这时按`<C-d>`退出，只是退回了ranger
 
     同理，如果此时在新的终端中输入ranger，那就达成了一个`shell->ranger->shell->ranger`的套娃。
@@ -69,7 +63,7 @@ ranger --copy-config=all
       	</div>
     </center>
 
-    这当然不是我想要的功能，况且叠的还是bash而不是我想用的powershell
+    这当然不是我想要的功能，况且叠的还是bash(wsl) 而不是我想用的powershell
 
 2. **利用source**
 
@@ -79,7 +73,7 @@ ranger --copy-config=all
 
     这个方法很好，解决问题，但是——
 
-    我这个是在powershell调用wsl的ranger，很明显`source wsl ranger`或者`. wsl ranger`没有用，况且，ranger输出的`/mnt/...`路径也不能被windows正确读取
+    本人的状况是在powershell调用wsl的ranger，很明显`source wsl ranger`或者`. wsl ranger`没有用，况且，ranger输出的`/mnt/...`路径也不能被windows正确读取
 
 3. **让ranger输出目录路径，处理后读取**
 
@@ -99,11 +93,10 @@ ranger --copy-config=all
     
     ```
 
-    这个方法着实解决了痛点（虽然无聊到套娃用ranger实际上是一个很蠢的举动）
+    这个方法确实解决了问题（虽然无聊到套娃用ranger实际上是一个很蠢的举动）
     
     
-
-然后，我发现，问题只是解决了一半……
+然而，问题只是解决了一半……
 
 平时的跳转非常丝滑，没有任何问题
 
@@ -119,7 +112,7 @@ ranger --copy-config=all
 
 排查了一会儿，发现直到`wsl wslpath (...)`输出的都是正常的，都是一旦经过pipeline就乱码了——
 
-这让本人顿时豁然开朗：原来是祖传UTF-8错误。个人猜测是和这篇[博客](https://blog.darkthread.net/blog/ps-pipeline-exe-encoding/)说的差不多，`wslpath`这个工具没有能力自动切换语系编码，只能统一输出UTF-8
+原来是祖传UTF-8错误。个人猜测是和这篇[博客](https://blog.darkthread.net/blog/ps-pipeline-exe-encoding/)说的差不多，`wslpath`这个工具没有能力自动切换语系编码，只能统一输出UTF-8
 
 那在脚本开头再加一句就可以了：
 
@@ -179,3 +172,4 @@ ext ods?|xls?|xlsx?|csv?|ics?|vcf?|3dm?|3ds?|max?|bmp?|dds?|gif?|jpg?|jpeg?|png?
 
 
 ​    
+
