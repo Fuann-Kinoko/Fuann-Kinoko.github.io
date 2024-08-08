@@ -1,6 +1,6 @@
 +++
 title = "音游成长记录"
-thumbnail = 'https://i.loli.net/2019/11/01/K9GkpRHM3uNzQwv.jpg'
+thumbnail = 'https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/otoge.webp'
 date = 2019-10-31
 tags = ["随想", "音游"]
 description = "我与音游"

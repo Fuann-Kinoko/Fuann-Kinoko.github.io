@@ -1,36 +1,19 @@
-name = 'Theme name'
-license = 'MIT'
-licenselink = 'https://github.com/owner/repo/LICENSE'
-description = 'Theme description'
+name = 'Sakura Clone'
+license = 'GPL 2.0'
+licenselink = 'https://github.com/Fuann-Kinoko/hugo-theme-sakura-clone/LICENSE'
+description = "An incomplete port of the Hexo theme 'Sakura', which was originally ported from the WordPress theme 'Sakura'"
 
 # The home page of the theme, where the source can be found
-homepage = 'https://github.com/owner/repo'
-
-# If you have a running demo of the theme
-demosite = 'https://owner.github.io/repo'
+homepage = 'https://github.com/Fuann-Kinoko/hugo-theme-sakura-clone'
 
 # Taxonomy terms
-tags = ['blog', 'company']
-features = ['some', 'awesome', 'features']
-
-# If the theme has multiple authors
-authors = [
-  {name = 'Name of author', homepage = 'Website of author'},
-  {name = 'Name of author', homepage = 'Website of author'}
-]
+tags = ['blog']
 
 # If the theme has a single author
 [author]
-  name = 'Your name'
-  homepage = 'Your website'
+  name = 'Fuann-Kinoko'
 
 # If porting an existing theme
 [original]
-  author = 'Name of original author'
-  homepage = 'Website of original author'
-  repo = 'https://github.com/owner/repo'
-
-[pagination]
-  disableAliases = false
-  pagerSize = 2
-  path = 'page'
+  author = 'honjun'
+  repo = 'https://github.com/honjun/hexo-theme-sakura?tab=readme-ov-file'

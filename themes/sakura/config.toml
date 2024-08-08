@@ -1,6 +1,6 @@
 baseURL = 'https://example.org/'
 languageCode = 'en-US'
-title = '不安きのこ'
+title = 'My New Blog'
 
 [[menus.main]]
 name = 'Home'
@@ -47,6 +47,8 @@ weight = 30
 
 [params]
   [params.Images]
-    section = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
-    taxonomy = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
-    terms = "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/banner/placebo.webp"
+    home = ""
+    # refer to static/banner/placebo.webp
+    section  = "/banner/placebo.webp"
+    taxonomy = "/banner/placebo.webp"
+    terms    = "/banner/placebo.webp"

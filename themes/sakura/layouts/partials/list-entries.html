@@ -5,8 +5,8 @@
   <div class="post-entry">
     <div class="feature">
       <a href="{{ $entry.Permalink }}">
-        {{ $defaultImage := "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" }}
-        {{ $entryImage := $entry.Params.thumbnail | default $defaultImage }}
+        {{ $defaultImage := resources.Get "images/404.webp" | resources.Fingerprint }}
+        {{ $entryImage := $entry.Params.thumbnail | default $defaultImage.Permalink }}
           {{ if . }}
             <img width="150" height="150" src="{{ $entryImage }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" style="object-fit: cover;">
           {{ end }}

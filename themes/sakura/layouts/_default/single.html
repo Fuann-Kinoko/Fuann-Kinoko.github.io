@@ -15,8 +15,8 @@
     <!-- 文章页面 -->
     <div class="pattern-center-blank"></div>
 
-    {{ $defaultImage := "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" }}
-    {{ $thumbnail := .Params.thumbnail | default $defaultImage }}
+    {{ $defaultImage := resources.Get "images/404.webp" | resources.Fingerprint }}
+    {{ $thumbnail := .Params.thumbnail | default $defaultImage.Permalink }}
     <div class="pattern-center single-center">
         <!-- 配图或备用图片 -->
         <div class="pattern-attachment-img lazyload" style="background-image: url({{ $thumbnail }});" src="{{ $thumbnail }}" data-src="{{ $thumbnail }}"></div>

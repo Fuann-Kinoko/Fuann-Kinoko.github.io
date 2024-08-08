@@ -1,14 +1,20 @@
 {{ define "main" }}
 
   <div class="pattern-center-blank"></div>
-  {{ $defaultImage := "https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" }}
+  {{ $defaultImage := resources.Get "images/404.webp" | resources.Fingerprint }}
+
   {{- $listImage := "" -}}
+
+  {{- $sectionImage := .Site.Params.Images.section }}
+  {{- $taxonomyImage := .Site.Params.Images.taxonomy }}
+  {{- $termsImage := .Site.Params.Images.terms }}
+  
   {{- if eq .Kind "section" -}}
-      {{- $listImage = .Site.Params.Images.section | default $defaultImage -}}
+      {{- $listImage = $sectionImage -}}
   {{- else if eq .Kind "taxonomy" -}}
-      {{- $listImage = .Site.Params.Images.taxonomy | default $defaultImage -}}
+      {{- $listImage = $taxonomyImage -}}
   {{- else if eq .Kind "terms" -}}
-      {{- $listImage = .Site.Params.Images.term | default $defaultImage -}}
+      {{- $listImage = $termsImage -}}
   {{- else -}}
       {{- $listImage = $defaultImage -}}
   {{- end -}}

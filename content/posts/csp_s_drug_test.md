@@ -1,6 +1,6 @@
 +++
 title = "CSP-S测试 药品试验 题解"
-thumbnail = 'https://i.loli.net/2019/11/08/9JiQw3Ef5W6TGse.jpg'
+thumbnail = 'https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/csps_s_drug_test.webp'
 date = 2019-11-08
 tags = ["OI"]
 description = "数学"

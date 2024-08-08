@@ -1,6 +1,6 @@
 +++
 title = "有关C(n+k-1,2k-1)的代数意义及证明"
-thumbnail = 'https://i.loli.net/2020/02/09/C3KAxzGPo9TnSHq.jpg'
+thumbnail = 'https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/random_math_thought/random_math_thought.webp'
 date = 2020-02-09
 tags = ["随想", "math"]
 description = "组合数学"
@@ -53,13 +53,13 @@ description = "组合数学"
 
 将k元组$\alpha$与k维空间中的点$X(x_1,x_2,...,x_k)$对应，则$T(\alpha)$即为$\Omega(X)$中单位胞体的个数
 
-![二维和三维图](https://i.loli.net/2020/02/09/T7Q5vxqmpu3nkhg.jpg)
+![二维和三维图](https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/random_math_thought/01.webp)
 
 设A中元素对应的点集合为B，设$\Delta(X)$为$\Omega(X)$的单位胞体个数，则$\sum_{\alpha\in A}T(\alpha)=\sum_{X\in B}\Omega(X)$。
 
 易知B中元素皆是空间$\delta：x_1+x_2+...+x_k=n$上的极点。
 
-![二维图](https://i.loli.net/2020/02/09/4Ac9ilFNuwrJ3Px.jpg)
+![二维图](https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/random_math_thought/02.webp)
 
 现在就要考虑每个单位胞体被计算的次数，即求它被多少个B中元素的生成胞体包含。
 
@@ -67,13 +67,13 @@ description = "组合数学"
 
 我们用一个单位胞体中，坐标之和最大的那个点来代指这个单位胞体。如果一个单位胞体$Q(q_1,q_2,...,q_k)$满足$n-(q_1+q_2+...+q_k)=i-1$，则称它位于第$i$层。
 
-![二维图](https://i.loli.net/2020/02/09/xKgnE7Y6fSNJvcu.jpg)
+![二维图](https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/random_math_thought/03.webp)
 
 因为在第$i$层的胞体Q满足$q_1+q_2+...+q_k=n-i+1$，所以这一层有$C_{i-1}^{k-1}$个单位胞体。注意到一个胞体Q被包含在点$P(p_1,p_2,...,p_k)$的生成胞体$\Omega(P)$中的充要条件是：
 
 ​	$\forall i\in{(1,2,...,k)},p_i>=q_i$成立
 
-![二维图](https://i.loli.net/2020/02/09/cj4aEMvTOlI9Ktd.jpg)
+![二维图](https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/random_math_thought/04.webp)
 
 因此可以得到，对于某个位于第$i$层的单位胞体Q，若B中的点X的生成胞体包含它，则
 

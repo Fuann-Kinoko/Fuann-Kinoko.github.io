@@ -1,8 +1,11 @@
 {{ define "main" }}
+  {{ $wave1Image := resources.Get "images/wave1.png" | resources.Fingerprint }}
+  {{ $wave2Image := resources.Get "images/wave2.png" | resources.Fingerprint }}
+  {{ $bannerImage := resources.Get "images/banner.webp" | resources.Fingerprint }}
 <div class="headertop filter-dot" style="height: auto;">
-  <div id="banner_wave_1" style="left: -1233px;"></div>
-  <div id="banner_wave_2" style="left: -1009px;"></div>
-  <figure id="centerbg" class="centerbg" style="background-image: url(&quot;https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/Covers/116.webp&quot;); height: 650px;">
+  <div id="banner_wave_1" style="left: -1233px; background: url(&quot;{{ $wave1Image.Permalink }}&quot;) repeat-x;"></div>
+  <div id="banner_wave_2" style="left: -1009px; background: url(&quot;{{ $wave2Image.Permalink }}&quot;) repeat-x;"></div>
+  <figure id="centerbg" class="centerbg" style="background-image: url(&quot;{{ $bannerImage.Permalink }}&quot;); height: 650px;">
   </figure>
 </div>
 
@@ -14,10 +17,11 @@
       <article class="post post-list-thumb {{ if eq (mod $index 2) 0 }}post-list-thumb-left{{ else }}post-list-thumb-right{{ end }}">
         <div class="post-thumbnail">
           <a href="{{ .Permalink }}">
+            {{ $defaultImage := resources.Get "images/404.webp" | resources.Fingerprint }}
             {{ with .Params.thumbnail }}
             <img src="{{ . }}" alt="{{ $.Title }}">
             {{ else }}
-            <img src="https://cdn.jsdelivr.net/gh/Fuann-Kinoko/cdn@0.1/posts/404.jpg" alt="{{ $.Title }}">
+            <img src="{{ $defaultImage.Permalink }}" alt="{{ $.Title }}">
             {{ end }}
           </a>
         </div>

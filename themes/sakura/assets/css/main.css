@@ -208,7 +208,7 @@ a {
 #banner_wave_1 {
     width:auto;
     height:65px;
-    background:url("https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wave1.png") repeat-x;
+    /* background:url("../images/wave1.png") repeat-x; */
     _filter:alpha(opacity=80);
     position:absolute;
     bottom:0;
@@ -222,7 +222,7 @@ a {
 #banner_wave_2 {
     width:auto;
     height:80px;
-    background:url("https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/wave2.png") repeat-x;
+    /* background:url("../images/wave2.png") repeat-x; */
     _filter:alpha(opacity=80);
     position:absolute;
     bottom:0;
@@ -249,7 +249,7 @@ a {
     background-attachment:fixed
 }
 .headertop.filter-dot::before {
-    background-image:url(https://cdn.jsdelivr.net/gh/honjun/cdn@1.6/img/other/dot.gif)
+    background-image:url("../images/dot.gif")
 }
 #centerbg {
     width:100%;
